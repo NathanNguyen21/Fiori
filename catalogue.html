@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="index.css">
-<title>Fiori</title>
+<title>Fiori - Catalog</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&family=Public+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@500;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="catalogue.css">
 </head>
 <body>
   <!-- Top Banner -->
@@ -42,18 +41,8 @@
     </div>
   </div>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <div class="hero-card">
-      <div class="hero-title">Fresh Flowers.</div>
-      <div class="hero-subtitle">Hand-picked for any occasion. Shop Now!</div>
-      <button class="catalog-button" onclick="navigateTo('catalog')">Full Catalog</button>
-    </div>
-  </div>
-
-  <!-- Products Section -->
-  <div class="products-section">
-    <h2 class="section-title">Shop Our Fall Favorites!</h2>
+  <!-- Products Grid Section -->
+  <div class="catalog-section">
     <div class="products-grid">
       <div class="product-card">
         <div class="product-image"></div>
@@ -82,20 +71,86 @@
           <span class="price-value">$45</span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Store Info Section -->
-  <div class="store-section">
-    <div class="store-image">
-      <div class="store-overlay"></div>
-    </div>
-    <div class="store-info">
-      <div class="store-title">OUR STORE</div>
-      <div class="store-address">Fiori / Staten Island NY</div>
-      <div class="store-hours">
-        Monday - Thursday 9am-5pm<br/>
-        Friday - Saturday 11am-7pm  Sun - Closed
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Spring Garden Mix</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$50</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">White Rose Elegance</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$70</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Tropical Paradise</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$85</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Lavender Dreams</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$60</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Pink Peony Collection</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$75</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Wildflower Medley</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$40</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Classic Red Roses</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$80</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Sunset Bouquet</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$55</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="quick-view">Quick view</div>
+        <div class="product-name">Garden Romance</div>
+        <div class="product-price">
+          <span class="price-label">FROM</span>
+          <span class="price-value">$65</span>
+        </div>
       </div>
     </div>
   </div>
@@ -171,7 +226,11 @@
     function navigateTo(section) {
       console.log('Navigating to:', section);
       // Add your navigation logic here
-      alert('Navigating to: ' + section);
+      if (section === 'catalog') {
+        window.location.href = 'catalog.html';
+      } else {
+        window.location.href = 'index.html';
+      }
     }
   </script>
 </body>
