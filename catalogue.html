@@ -44,7 +44,7 @@
   <!-- Products Grid Section -->
   <div class="catalog-section">
     <div class="products-grid">
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(1)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Dark Fuchsia Bouquet</div>
@@ -53,7 +53,7 @@
           <span class="price-value">$55</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(2)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Autumn Sunflower Bouquet</div>
@@ -62,7 +62,7 @@
           <span class="price-value">$65</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(3)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Red Assorted Bouquet</div>
@@ -71,7 +71,7 @@
           <span class="price-value">$45</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(4)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Spring Garden Mix</div>
@@ -80,7 +80,7 @@
           <span class="price-value">$50</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(5)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">White Rose Elegance</div>
@@ -89,7 +89,7 @@
           <span class="price-value">$70</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(6)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Tropical Paradise</div>
@@ -98,7 +98,7 @@
           <span class="price-value">$85</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(7)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Lavender Dreams</div>
@@ -107,7 +107,7 @@
           <span class="price-value">$60</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(8)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Pink Peony Collection</div>
@@ -116,7 +116,7 @@
           <span class="price-value">$75</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(9)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Wildflower Medley</div>
@@ -125,7 +125,7 @@
           <span class="price-value">$40</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(10)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Classic Red Roses</div>
@@ -134,7 +134,7 @@
           <span class="price-value">$80</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(11)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Sunset Bouquet</div>
@@ -143,7 +143,7 @@
           <span class="price-value">$55</span>
         </div>
       </div>
-      <div class="product-card">
+      <div class="product-card" onclick="goToProduct(12)">
         <div class="product-image"></div>
         <div class="quick-view">Quick view</div>
         <div class="product-name">Garden Romance</div>
@@ -225,12 +225,16 @@
   <script>
     function navigateTo(section) {
       console.log('Navigating to:', section);
-      // Add your navigation logic here
       if (section === 'catalog') {
-        window.location.href = 'catalog.html';
+        window.location.href = 'catalogue.html';
       } else {
         window.location.href = 'index.html';
       }
+    }
+
+    // THIS WAS MISSING - Function to go to product detail page
+    function goToProduct(productId) {
+      window.location.href = `product-detail.html?id=${productId}`;
     }
   </script>
 </body>
