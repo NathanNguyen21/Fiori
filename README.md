@@ -9,3 +9,7 @@ In our first prototype, we are aiming to make a base for the website, with main 
 In our second prototype, we will focus on user experience by adding user page, where a customer can create their account, login and save all the neccesary inforamtion on their account. We will also add a database for users, so the username, email address, login info etc. will be stored.
 
 
+# Link to the website
+https://migyny.github.io/Fiori/
+
+
