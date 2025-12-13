@@ -1,3 +1,4 @@
+--- detail.sql
 #Customer----------
 #INSERT INTO Customer (customer_id, password, address, phone, name, email) VALUES
 #('Q5U4EX7YY2E9N', 'Pass87678', '387 Posey Street', '563-392-3648', 'Teri Cru', 'euro45@aol.com'),

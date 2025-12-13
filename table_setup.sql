@@ -1,3 +1,4 @@
+--- table_setup.sql
 #Create Fiori Flower Shop Database
 #CREATE DATABASE FioriDB;
 USE FioriDB;
