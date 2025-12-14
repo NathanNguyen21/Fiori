@@ -33,7 +33,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    background-image: url("1.png");
+    background-image: url("../png/1.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -432,7 +432,7 @@ body {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    background-image: url("social1.png");
+    background-image: url("../png/social1.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -445,7 +445,7 @@ body {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    background-image: url("social2.png");
+    background-image: url("../png/social2.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -458,7 +458,7 @@ body {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    background-image: url("social3.png");
+    background-image: url("../png/social3.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

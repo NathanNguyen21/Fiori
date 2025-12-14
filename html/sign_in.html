@@ -6,12 +6,12 @@
   <title>Sign In - Fiori</title>
   
   <!-- Styles -->
-    <link rel="stylesheet" href="catalogue.css">
-  <link rel="stylesheet" href="cart.css">
-  <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="../CSS/catalogue.css">
+  <link rel="stylesheet" href="../CSS/cart.css">
+  <link rel="stylesheet" href="../CSS/checkout.css">
   <!-- Scripts -->
-  <script src="cart.js"></script>
-  <script src="search.js"></script>
+  <script src="../Javascript/cart.js"></script>
+  <script src="../Javascript/search.js"></script>
 </head>
 
 
@@ -78,22 +78,56 @@
   </div>
 
   <script>
-function handleSignIn() {
-  const email = document.getElementById("signin-email").value.trim();
-  const password = document.getElementById("signin-password").value.trim();
-  const errorEl = document.getElementById("signin-error");
-  errorEl.style.display = "none";
+async function handleSignIn() {
+    const emailInput = document.getElementById("signin-email");
+    const passwordInput = document.getElementById("signin-password");
+    const errorEl = document.getElementById("signin-error");
+    
+    // 1. Reset Error Message
+    errorEl.style.display = "none";
+    errorEl.textContent = "";
 
-  const user = JSON.parse(localStorage.getItem("userAccount"));
-  if (!user || user.email !== email || user.password !== password) {
-    errorEl.textContent = "Invalid email or password";
-    errorEl.style.display = "block";
-    return;
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+      errorEl.textContent = "Please enter both email and password.";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    try {
+      // 2. Send credentials to Backend
+      const response = await fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // 3. Login Success!
+        
+        // Save the user data from database into localStorage
+        // (This keeps you logged in across pages)
+        localStorage.setItem("fioriUser", JSON.stringify(data.user));
+        
+        // Redirect to Account Page
+        window.location.href = "account.html";
+        
+      } else {
+        // 4. Login Failed (Show error from server)
+        errorEl.textContent = data.error || "Login failed";
+        errorEl.style.display = "block";
+      }
+
+    } catch (error) {
+      console.error("Login Error:", error);
+      errorEl.textContent = "Server connection failed. Is node server.js running?";
+      errorEl.style.display = "block";
+    }
   }
-
-  //redirect to account page
-  window.location.href = "account.html";
-}
   </script>
 </body>
 </html>

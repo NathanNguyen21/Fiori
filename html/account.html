@@ -12,13 +12,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&family=Public+Sans:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
 
   <!--styles-->
-  <link rel="stylesheet" href="catalogue.css">
-  <link rel="stylesheet" href="cart.css">
-  <link rel="stylesheet" href="checkout.css">
+  <link rel="stylesheet" href="../CSS/catalogue.css">
+  <link rel="stylesheet" href="../CSS/cart.css">
+  <link rel="stylesheet" href="../CSS/checkout.css">
 
   <!--scripts-->
-  <script src="cart.js"></script>
-  <script src="search.js"></script>
+  <script src="../Javascript/cart.js"></script>
+  <script src="../Javascript/search.js"></script>
 </head>
 
   <style>
@@ -126,123 +126,97 @@
   </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-  
-    let user = JSON.parse(localStorage.getItem("fioriUser"));
+  document.addEventListener("DOMContentLoaded", async () => {
 
-    if (!user) {
-        window.location.href = "signup.html";
-        return;
-  }
-
-  //display account info
-  document.getElementById("display-name").textContent = user.name || "-";
-  document.getElementById("display-email").textContent = user.email || "-";
-
-  const addr = user.address || {};
-  document.getElementById("display-street").textContent = addr.street || "-";
-  document.getElementById("display-city").textContent = addr.city || "-";
-  document.getElementById("display-state").textContent = addr.state || "-";
-  document.getElementById("display-postal").textContent = addr.postal || "-";
-  document.getElementById("display-country").textContent = addr.country || "-";
-
-  //render previous orders
-  function renderOrders() {
-  const ordersList = document.getElementById("orders-list");
-  const orders = user.orders || [];
-  ordersList.innerHTML = "";
-
-  if (orders.length === 0) {
-    ordersList.innerHTML = "<p>No previous orders.</p>";
-    return;
-  }
-
-  orders.forEach(order => {
-    const orderDiv = document.createElement("div");
-    orderDiv.classList.add("order");
-
-    //order date
-    const date = new Date(order.date).toLocaleString();
-    orderDiv.innerHTML = `<h4>Order Date: ${date}</h4>`;
-
-    let calculatedTotal = 0;
-
-    //items
-    order.items.forEach(item => {
-
-      //get numerical values of prices
-      const price = parseFloat(String(item.price).replace(/[^0-9.-]+/g, "")) || 0;
-      const quantity = Number(item.quantity) || 0;
-      const lineTotal = price * quantity;
-      calculatedTotal += lineTotal ;
-
-      const itemDiv = document.createElement("div");
-      itemDiv.classList.add("order-item");
-      itemDiv.innerHTML = `<span>${item.name} × ${quantity}</span><span>$${lineTotal.toFixed(2)}</span>`;
-      orderDiv.appendChild(itemDiv);
-    });
-
-    //include shipping if qualifies
-    if (order.shipping) {
-      calculatedTotal += parseFloat(order.shipping) || 0;
+    // 2. Get User Data
+    const userString = localStorage.getItem("fioriUser");
+    
+    if (!userString) {
+      window.location.href = "sign_in.html";
+      return;
     }
 
-    //store subtotal
-    orderDiv.innerHTML += `<p><strong>Subtotal:</strong> $${calculatedTotal.toFixed(2)}</p>`;
-    ordersList.appendChild(orderDiv);
+    const user = JSON.parse(userString);
+
+    // 3. Display Basic Info
+    document.getElementById("display-name").textContent = user.name || "No Name";
+    document.getElementById("display-email").textContent = user.email || "No Email";
+
+    // Display Address safely
+    if (user.address) {
+      const parts = user.address.split(',').map(s => s.trim());
+      document.getElementById("display-street").textContent = parts[0] || "-";
+      document.getElementById("display-city").textContent = parts[1] || "-";
+      if (parts[2]) {
+        const stateZip = parts[2].split(' ');
+        document.getElementById("display-state").textContent = stateZip[0] || "-";
+        document.getElementById("display-postal").textContent = stateZip[1] || "-";
+      }
+      document.getElementById("display-country").textContent = parts[3] || "-";
+    }
+
+    // 4. Fetch Previous Orders
+    const ordersList = document.getElementById("orders-list");
+    ordersList.innerHTML = "<p>Loading orders...</p>";
+
+    if (!user.customerId) {
+      ordersList.innerHTML = "<p>No Customer ID found. Please Sign In again.</p>";
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/orders/${user.customerId}`);
+      const orders = await response.json();
+
+      ordersList.innerHTML = ""; // Clear loading message
+
+      if (orders.length === 0) {
+        ordersList.innerHTML = "<p>No previous orders found.</p>";
+        return;
+      }
+
+      orders.forEach(order => {
+        const orderDiv = document.createElement("div");
+        orderDiv.classList.add("order");
+        
+        // Format Date
+        const dateObj = new Date(order.date);
+        const dateStr = dateObj.toLocaleDateString();
+
+        // Calculate Items Summary
+        const itemSummary = order.items.map(i => `${i.name} (x${i.quantity})`).join(", ");
+
+        // === SPECIFIC LAYOUT FOR ORDER ID, DATE, TOTAL ===
+        orderDiv.innerHTML = `
+          <div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 15px; background: white;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 10px;">
+              <span style="font-weight: 700; font-size: 16px;">Order ID: #${order.id}</span>
+              <span style="color: #666;">Date: ${dateStr}</span>
+            </div>
+            
+            <div style="font-size: 14px; color: #444; margin-bottom: 10px;">
+              <strong>Items:</strong> ${itemSummary}
+            </div>
+
+            <div style="text-align: right; font-size: 18px; font-weight: 700; color: #1E1E1E;">
+              Total Amount: $${parseFloat(order.total).toFixed(2)}
+            </div>
+          </div>
+        `;
+        ordersList.appendChild(orderDiv);
+      });
+
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      ordersList.innerHTML = `<p style="color:red;">Could not load orders. Ensure server is running.</p>`;
+    }
+
+    window.logout = function() {
+      localStorage.removeItem("fioriUser");
+      localStorage.removeItem("fioriCart");
+      window.location.href = "index.html";
+    };
   });
-}
-  renderOrders();
-
-  //allow users to save address in account
-  function editAddress() {
-    document.getElementById("address-display").style.display = "none";
-    document.getElementById("address-edit").style.display = "block";
-
-    document.getElementById("edit-street").value = addr.street || "";
-    document.getElementById("edit-city").value = addr.city || "";
-    document.getElementById("edit-state").value = addr.state || "";
-    document.getElementById("edit-postal").value = addr.postal || "";
-    document.getElementById("edit-country").value = addr.country || "";
-  }
-
-  function saveAddress() {
-    const street = document.getElementById("edit-street").value.trim();
-    const city = document.getElementById("edit-city").value.trim();
-    const state = document.getElementById("edit-state").value.trim();
-    const postal = document.getElementById("edit-postal").value.trim();
-    const country = document.getElementById("edit-country").value.trim();
-
-    user.address = { street, city, state, postal, country };
-    localStorage.setItem("fioriUser", JSON.stringify(user));
-
-    document.getElementById("display-street").textContent = street || "-";
-    document.getElementById("display-city").textContent = city || "-";
-    document.getElementById("display-state").textContent = state || "-";
-    document.getElementById("display-postal").textContent = postal || "-";
-    document.getElementById("display-country").textContent = country || "-";
-
-    document.getElementById("address-edit").style.display = "none";
-    document.getElementById("address-display").style.display = "block";
-  }
-
-  window.editAddress = editAddress;
-  window.saveAddress = saveAddress;
-
-  //return to homepage when logged out
-  window.logout = function() {
-    localStorage.removeItem("fioriUser");
-    window.location.href = "index.html";
-  };
-
-  //account button in header
-  const accountWrapper = document.querySelector(".account-wrapper");
-  if (accountWrapper) {
-    accountWrapper.addEventListener("click", () => {
-      window.location.href = "account.html";
-    });
-  }
-});
 </script>
 
 

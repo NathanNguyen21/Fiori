@@ -198,7 +198,7 @@ function checkout() {
   //save latest cart's status
   cart.saveCart();
   
-  window.location.href = "checkout.html";
+  window.location.href = "../html/checkout.html";
   //alert(`Checkout - Total: $${cart.getTotal().toFixed(2)}\n\nThis would redirect to checkout page.`);
   // Here you would redirect to checkout page or process payment
 }

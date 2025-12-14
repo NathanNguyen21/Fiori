@@ -9,38 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     accountBtn.parentElement.addEventListener("click", () => {
       if (currentUser) {
-        window.location.href = "account.html";
+        window.location.href = "../html/account.html";
       } else {
-        window.location.href = "sign_in.html";
+        window.location.href = "../html/sign_in.html";
       }
     });
   }
 
-  //order button logic
-  const placeOrderBtn = document.getElementById("place-order-btn");
-  const successMessage = document.getElementById("success-message");
-
-  if (placeOrderBtn && successMessage) {
-    placeOrderBtn.addEventListener("click", () => {
-      const fullName = document.getElementById("full-name")?.value;
-      const email = document.getElementById("email")?.value;
-      const street = document.getElementById("street")?.value;
-
-      if (!fullName || !email || !street) {
-        alert("Order Failed. Please fill in valid info.");
-        return;
-      }
-
-      //show success message
-      successMessage.style.display = "block";
-
-      //clear cart
-      localStorage.removeItem("fioriCart");
-
-      //redirect to home page
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 1500);
-    });
-  }
+  // Note: Order button logic is handled in checkout.js to avoid duplicate handlers
 });

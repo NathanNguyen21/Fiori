@@ -133,21 +133,31 @@ renderCart();
       return;
     }
 
-    //save order
-    if (!user.orders) user.orders = [];
-    user.orders.push({
-      date: new Date().toISOString(),
+    // NEW: Send Order to Server
+    const orderData = {
+      customerId: user.customerId, // Ensure user object has customerId from login
       items: cart,
       total: currentSubtotal + currentShipping
-    });
-    localStorage.setItem("fioriUser", JSON.stringify(user));
+    };
 
-    //clear cart
-    localStorage.removeItem("fioriCart");
-    renderCart();
-
-    //show success message
-    successMessage.style.display = "block";
+    fetch('http://localhost:3000/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData)
+    })
+    .then(response => {
+      if (response.ok) {
+        // Clear Cart
+        localStorage.removeItem("fioriCart");
+        successMessage.style.display = "block";
+        setTimeout(() => {
+           window.location.href = "../html/index.html";
+        }, 2000);
+      } else {
+        alert("Failed to place order. Server error.");
+      }
+    })
+    .catch(err => console.error("Checkout Error:", err));
 
   });
 

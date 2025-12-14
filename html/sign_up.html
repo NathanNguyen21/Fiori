@@ -11,12 +11,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&family=Public+Sans:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
 
     <!--styles-->
-    <link rel="stylesheet" href="catalogue.css">
-  <link rel="stylesheet" href="cart.css">
-  <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="../CSS/catalogue.css">
+  <link rel="stylesheet" href="../CSS/cart.css">
+  <link rel="stylesheet" href="../CSS/checkout.css">
   <!--scripts -->
-  <script src="cart.js"></script>
-  <script src="search.js"></script>
+  <script src="../Javascript/cart.js"></script>
+  <script src="../Javascript/search.js"></script>
 </head>
 <body>
 
@@ -92,91 +92,101 @@
   </div>
 
 <script>
-function handleSignup() {
-  document.querySelectorAll(".error-msg").forEach(e => e.remove());
-  let valid = true;
+async function handleSignup() { // Made function async
+    // 1. Clear previous errors
+    document.querySelectorAll(".error-msg").forEach(e => e.remove());
+    let valid = true;
 
-  const name = document.getElementById("signup-name");
-  const email = document.getElementById("signup-email");
-  const pass = document.getElementById("signup-password");
-  const confirm = document.getElementById("signup-confirm");
-  const street = document.getElementById("street");
-  const city = document.getElementById("city");
-  const state = document.getElementById("state");
-  const postal = document.getElementById("postal");
-  const country = document.getElementById("country");
+    // 2. Get values
+    const name = document.getElementById("signup-name");
+    const email = document.getElementById("signup-email");
+    const pass = document.getElementById("signup-password");
+    const confirm = document.getElementById("signup-confirm");
+    
+    // Address fields
+    const street = document.getElementById("street");
+    const city = document.getElementById("city");
+    const state = document.getElementById("state");
+    const postal = document.getElementById("postal");
+    const country = document.getElementById("country");
 
-  const nameVal = name.value.trim();
-  const emailVal = email.value.trim();
-  const passVal = pass.value.trim();
-  const confirmVal = confirm.value.trim();
-  const streetVal = street.value.trim();
-  const cityVal = city.value.trim();
-  const stateVal = state.value.trim();
-  const postalVal = postal.value.trim();
-  const countryVal = country.value.trim();
+    const nameVal = name.value.trim();
+    const emailVal = email.value.trim();
+    const passVal = pass.value.trim();
+    const confirmVal = confirm.value.trim();
 
-  //name validation
-  if (!/^[A-Z][a-z]+(\s[A-Z][a-z]+)+$/.test(nameVal)) {
-    valid = false;
-    const err = document.createElement("p");
-    err.className = "error-msg";
-    err.textContent = "Enter valid name (e.g., John Doe)";
-    name.insertAdjacentElement("afterend", err);
-  }
-
-  //email validation
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-    valid = false;
-    const err = document.createElement("p");
-    err.className = "error-msg";
-    err.textContent = "Enter a valid email";
-    email.insertAdjacentElement("afterend", err);
-  }
-
-  //password validation
-  if (!/^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{9,}$/.test(passVal)) {
-    valid = false;
-    const err = document.createElement("p");
-    err.className = "error-msg";
-    err.textContent = "Password must be at least 9 characters, include 1 capital letter and 1 special character";
-    pass.insertAdjacentElement("afterend", err);
-  }
-
-  if (confirmVal !== passVal) {
-    valid = false;
-    const err = document.createElement("p");
-    err.className = "error-msg";
-    err.textContent = "Passwords do not match";
-    confirm.insertAdjacentElement("afterend", err);
-  }
-
-  //address validation
-  [street, city, state, postal, country].forEach(el => {
-    if (!el.value.trim()) {
+    // 3. Validation Logic (Keep your existing validation)
+    // Name
+    if (!/^[A-Z][a-z]+(\s[A-Z][a-z]+)+$/.test(nameVal)) {
+      showError(name, "Enter full name (e.g., John Doe)");
       valid = false;
-      const err = document.createElement("p");
-      err.className = "error-msg";
-      err.textContent = "This field is required";
-      el.insertAdjacentElement("afterend", err);
     }
-  });
+    // Email
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+      showError(email, "Enter a valid email");
+      valid = false;
+    }
+    // Password
+    if (!/^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{9,}$/.test(passVal)) {
+      showError(pass, "Password must be 9+ chars, 1 Capital, 1 Special char");
+      valid = false;
+    }
+    if (confirmVal !== passVal) {
+      showError(confirm, "Passwords do not match");
+      valid = false;
+    }
+    // Address Check
+    [street, city, state, postal, country].forEach(el => {
+      if (!el.value.trim()) {
+        showError(el, "Required");
+        valid = false;
+      }
+    });
 
-  if (valid) {
-    const user = {
-      name: nameVal,
-      email: emailVal,
-      password: passVal,
-      address: { street: streetVal, city: cityVal, state: stateVal, postal: postalVal, country: countryVal },
-      orders: []
-    };
-    localStorage.setItem("fioriUser", JSON.stringify(user));
-    localStorage.setItem("currentUser", emailVal); 
-    window.location.href = "account.html";
+    // 4. Send to Database
+    if (valid) {
+      // Combine address parts into one string for the database
+      const fullAddress = `${street.value}, ${city.value}, ${state.value} ${postal.value}, ${country.value}`;
+
+      try {
+        const response = await fetch('http://localhost:3000/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameVal,
+            email: emailVal,
+            password: passVal,
+            address: fullAddress,
+            phone: null // Phone field isn't in your signup form yet
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Registration Successful! Please sign in.");
+          window.location.href = "sign_in.html";
+        } else {
+          // Show database error (e.g., Email already exists)
+          alert("Error: " + data.error);
+        }
+
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Server connection failed. Is node server.js running?");
+      }
+    }
   }
-}
+
+  // Helper to show errors
+  function showError(element, message) {
+    const err = document.createElement("p");
+    err.className = "error-msg";
+    err.textContent = message;
+    element.insertAdjacentElement("afterend", err);
+  }
 </script>
 
-<script src="main.js"></script>
+<script src="../Javascript/main.js"></script>
 </body>
 </html>

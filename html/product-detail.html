@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rosarivo:ital@0;1&family=Public+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@500;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="product-detail.css">
-<link rel="stylesheet" href="cart.css">
-<script src="search.js"></script>
+<link rel="stylesheet" href="../CSS/product-detail.css">
+<link rel="stylesheet" href="../CSS/cart.css">
+<script src="../Javascript/search.js"></script>
 </head>
 <body>
   <!-- Top Banner -->
@@ -242,9 +242,11 @@
   </div>
 
   <!-- Load cart.js FIRST -->
-  <script src="cart.js"></script>
+  <script src="../Javascript/cart.js"></script>
   
   <!-- Then load page scripts -->
+  <!--
+  
   <script>
     // Product Database
 const products = {
@@ -255,7 +257,7 @@ const products = {
       description: "Our Dark Fuchsia Bouquet features a stunning arrangement of deep magenta blooms that bring elegance and sophistication to any space. Hand-selected flowers are expertly arranged to create a perfect balance of color and texture.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island. We ensure your flowers arrive fresh and beautifully presented.",
       vaseLife: "With proper care, your Dark Fuchsia Bouquet will last 7-10 days. Keep flowers in fresh water, trim stems every 2-3 days, and place in a cool location away from direct sunlight.",
-      image: "3.png"
+      image: "../png/3.png"
     },
     2: {
       name: "Autumn Sunflower Bouquet",
@@ -264,7 +266,7 @@ const products = {
       description: "Bright and cheerful sunflowers combined with seasonal autumn blooms create a warm and inviting arrangement. Perfect for bringing sunshine into any room.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Sunflowers typically last 7-12 days with proper care. Change water daily and keep away from direct heat sources.",
-      image: "4.png"
+      image: "../png/4.png"
     },
     3: {
       name: "Red Assorted Bouquet",
@@ -273,7 +275,7 @@ const products = {
       description: "A passionate mix of red blooms featuring roses, carnations, and seasonal flowers. Perfect for expressing love and admiration.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "This bouquet will last 5-8 days with proper care. Trim stems at an angle and change water every 2 days.",
-      image: "5.png"
+      image: "../png/5.png"
     },
     4: {
       name: "Spring Garden Mix",
@@ -282,7 +284,7 @@ const products = {
       description: "A delightful collection of spring blooms including tulips, daffodils, and hyacinths that capture the essence of the season.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Spring flowers last 5-7 days. Keep in cool water and away from direct sunlight.",
-      image: "spring-mix.png"
+      image: "../png/spring-mix.png"
     },
     5: {
       name: "White Rose Elegance",
@@ -291,7 +293,7 @@ const products = {
       description: "Timeless and elegant, this arrangement features premium white roses accented with delicate greenery. Perfect for weddings and special occasions.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "White roses last 7-10 days with proper care. Remove any leaves below water line and change water every 2-3 days.",
-      image: "whiterose.jfif"
+      image: "../png/whiterose.jfif"
     },
     6: {
       name: "Tropical Paradise",
@@ -300,7 +302,7 @@ const products = {
       description: "Exotic tropical flowers including birds of paradise, orchids, and anthuriums create a stunning, bold arrangement.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Tropical flowers are long-lasting, typically 10-14 days. Mist daily and keep in a warm location.",
-      image: "tropical.png"
+      image: "../png/tropical.png"
     },
     7: {
       name: "Lavender Dreams",
@@ -309,7 +311,7 @@ const products = {
       description: "Soothing lavender blooms combined with purple and white flowers create a calming and aromatic arrangement.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Lavender arrangements last 7-9 days. Keep in cool water and enjoy the natural aromatherapy benefits.",
-      image: "lavender.jpg"
+      image: "../png/lavender.jpg"
     },
     8: {
       name: "Pink Peony Collection",
@@ -318,7 +320,7 @@ const products = {
       description: "Luxurious peonies in soft pink shades create a romantic and elegant display. A customer favorite for its beauty and fragrance.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Peonies last 5-7 days. They prefer cool temperatures and fresh water changes every 2 days.",
-      image: "peony.jfif"
+      image: "../png/peony.jfif"
     },
     9: {
       name: "Wildflower Medley",
@@ -327,7 +329,7 @@ const products = {
       description: "A charming mix of wildflowers and meadow blooms that bring a rustic, natural beauty to any space.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Wildflowers last 5-7 days. Keep stems trimmed and water fresh for best results.",
-      image: "wild.jfif"
+      image: "../png/wild.jfif"
     },
     10: {
       name: "Classic Red Roses",
@@ -336,7 +338,7 @@ const products = {
       description: "A timeless arrangement of premium long-stem red roses. The perfect way to express love and romance.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Red roses last 7-10 days with proper care. Remove thorns carefully and change water every 2-3 days.",
-      image: "rose.jfif"
+      image: "../png/rose.jfif"
     },
     11: {
       name: "Sunset Bouquet",
@@ -345,7 +347,7 @@ const products = {
       description: "Warm orange and yellow blooms reminiscent of a beautiful sunset. Features roses, gerberas, and lilies.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "This arrangement lasts 7-9 days. Keep in indirect sunlight and change water regularly.",
-      image: "sunset.jfif"
+      image: "../png/sunset.jfif"
     },
     12: {
       name: "Garden Romance",
@@ -354,7 +356,7 @@ const products = {
       description: "A romantic garden-style arrangement with roses, ranunculus, and lisianthus in soft pastel shades.",
       delivery: "Free same-day delivery available for orders placed before 2 PM. Standard delivery takes 2-4 hours within Staten Island.",
       vaseLife: "Garden flowers last 6-9 days. Trim stems at an angle and keep water fresh.",
-      image: "garden.jfif"
+      image: "../png/garden.jfif"
     }
   };
 
@@ -536,5 +538,190 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
+-->
+<script>
+    // Configuration
+    const API_BASE_URL = 'http://localhost:3000/api';
+
+    // Global variables
+    let qty = 1;
+    let userRating = 0;
+
+    // Get product ID from URL (e.g., product-detail.html?id=1)
+    function getProductId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id') || '1';
+    }
+
+    // 1. Fetch and Load Product Data from Database
+    async function loadProduct() {
+      const productId = getProductId();
+
+      try {
+        // Fetch specific product from your backend
+        const response = await fetch(`${API_BASE_URL}/products/${productId}`);
+        
+        if (!response.ok) {
+          throw new Error('Product not found');
+        }
+
+        const product = await response.json();
+
+        // Update UI with Database Data
+        document.querySelector('.product-title').textContent = product.name;
+        document.querySelector('.price').textContent = `$${product.price}`;
+        document.querySelector('#content-0 p').textContent = product.description;
+        document.title = `${product.name} - Fiori`;
+
+        // Update Main Image
+        const mainImage = document.querySelector('.product-main-image');
+        if (mainImage && product.image) {
+          // Check if image is a full URL or local file
+          const imageUrl = product.image.startsWith('http') ? product.image : `../png/${product.image}`;
+          mainImage.style.backgroundImage = `url('${imageUrl}')`;
+          mainImage.style.backgroundSize = 'cover';
+          mainImage.style.backgroundPosition = 'center';
+          mainImage.style.backgroundRepeat = 'no-repeat';
+        }
+
+        // NOTE: Since 'reviews', 'delivery', and 'vaseLife' are not in your database yet,
+        // we keep these static or random for now.
+        document.querySelector('.review-count').textContent = `${Math.floor(Math.random() * 50) + 10} reviews`; 
+        
+      } catch (error) {
+        console.error('Error loading product:', error);
+        document.querySelector('.product-title').textContent = "Product Not Found";
+      }
+    }
+
+    // 2. Fetch "Shop More" images from Database
+    async function loadShopMoreImages() {
+      try {
+        // Fetch all products to populate the "Shop More" grid
+        const response = await fetch(`${API_BASE_URL}/products`);
+        const allProducts = await response.json();
+
+        const cards = document.querySelectorAll('.product-card');
+        
+        cards.forEach((card, index) => {
+          // Pick the first 3 products from the database for the "Shop More" section
+          // (You can make this random if you want)
+          const product = allProducts[index]; 
+          
+          if (product) {
+            // Update Card Image
+            const imgDiv = card.querySelector('.product-image');
+            if (imgDiv) {
+              const imageUrl = product.image.startsWith('http') ? product.image : `../png/${product.image}`;
+              imgDiv.style.backgroundImage = `url('${imageUrl}')`;
+              imgDiv.style.backgroundSize = 'cover';
+              imgDiv.style.backgroundPosition = 'center';
+              imgDiv.style.backgroundRepeat = 'no-repeat';
+            }
+
+            // Update Card Text
+            const nameDiv = card.querySelector('.product-name');
+            if (nameDiv) nameDiv.textContent = product.name;
+
+            const priceDiv = card.querySelector('.price-value');
+            if (priceDiv) priceDiv.textContent = `$${product.price}`;
+            
+            // Make card clickable
+            card.onclick = () => window.location.href = `product-detail.html?id=${product.product_id}`;
+          }
+        });
+
+      } catch (error) {
+        console.error('Error loading shop more section:', error);
+      }
+    }
+
+    // Initialize Page
+    window.addEventListener('load', () => {
+      loadProduct();
+      loadShopMoreImages();
+    });
+
+    // --- Interactive Functions (Stars, Quantity, Accordion) ---
+
+    // Star Rating
+    function setRating(rating) {
+      userRating = rating;
+      updateStars(rating);
+    }
+
+    function hoverRating(rating) {
+      updateStars(rating);
+    }
+
+    function resetHover() {
+      updateStars(userRating);
+    }
+
+    function updateStars(rating) {
+      const stars = document.querySelectorAll('.star');
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.setAttribute('fill', '#FFD700');
+        } else {
+          star.setAttribute('fill', '#717171');
+        }
+      });
+    }
+
+    // Quantity
+    function increaseQty() {
+      qty++;
+      document.getElementById('quantity').textContent = qty;
+    }
+
+    function decreaseQty() {
+      if (qty > 1) {
+        qty--;
+        document.getElementById('quantity').textContent = qty;
+      }
+    }
+
+    // Accordion
+    function toggleAccordion(index) {
+      const content = document.getElementById(`content-${index}`);
+      const icon = document.getElementById(`icon-${index}`);
+      
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        icon.classList.remove('open');
+      } else {
+        document.querySelectorAll('.accordion-content').forEach((item, i) => {
+          if (i !== index) {
+            item.style.maxHeight = null;
+            document.getElementById(`icon-${i}`).classList.remove('open');
+          }
+        });
+        
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.classList.add('open');
+      }
+    }
+
+    // Add to Cart (Integrated with your existing cart.js)
+    function addToCartFromDetail() {
+      const productId = getProductId();
+      // We grab the name/price from the DOM since we already fetched them
+      const name = document.querySelector('.product-title').textContent;
+      const priceText = document.querySelector('.price').textContent; 
+      
+      if (typeof cart !== 'undefined') {
+        cart.addItem({
+          id: productId,
+          name: name,
+          price: priceText, // e.g. "$55.00"
+          quantity: qty
+        });
+        openCart();
+      } else {
+        console.error("Cart system not loaded");
+      }
+    }
+  </script>
 </body>
 </html>

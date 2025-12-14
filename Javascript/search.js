@@ -1,18 +1,18 @@
 
 // Product Database 
 const productsDatabase = {
-  1: { name: "Dark Fuchsia Bouquet", price: "$55.00", image: "3.png" },
-  2: { name: "Autumn Sunflower Bouquet", price: "$65.00", image: "4.png" },
-  3: { name: "Red Assorted Bouquet", price: "$45.00", image: "5.png" },
-  4: { name: "Spring Garden Mix", price: "$50.00", image: "spring-mix.png" },
-  5: { name: "White Rose Elegance", price: "$70.00", image: "whiterose.jfif" },
-  6: { name: "Tropical Paradise", price: "$85.00", image: "tropical.png" },
-  7: { name: "Lavender Dreams", price: "$60.00", image: "lavender.jpg" },
-  8: { name: "Pink Peony Collection", price: "$75.00", image: "peony.jfif" },
-  9: { name: "Wildflower Medley", price: "$40.00", image: "wild.jfif" },
-  10: { name: "Classic Red Roses", price: "$80.00", image: "rose.jfif" },
-  11: { name: "Sunset Bouquet", price: "$55.00", image: "sunset.jfif" },
-  12: { name: "Garden Romance", price: "$65.00", image: "garden.jfif" }
+  1: { name: "Dark Fuchsia Bouquet", price: "$55.00", image: "../png/3.png" },
+  2: { name: "Autumn Sunflower Bouquet", price: "$65.00", image: "../png/4.png" },
+  3: { name: "Red Assorted Bouquet", price: "$45.00", image: "../png/5.png" },
+  4: { name: "Spring Garden Mix", price: "$50.00", image: "../png/spring-mix.png" },
+  5: { name: "White Rose Elegance", price: "$70.00", image: "../png/whiterose.jfif" },
+  6: { name: "Tropical Paradise", price: "$85.00", image: "../png/tropical.png" },
+  7: { name: "Lavender Dreams", price: "$60.00", image: "../png/lavender.jpg" },
+  8: { name: "Pink Peony Collection", price: "$75.00", image: "../png/peony.jfif" },
+  9: { name: "Wildflower Medley", price: "$40.00", image: "../png/wild.jfif" },
+  10: { name: "Classic Red Roses", price: "$80.00", image: "../png/rose.jfif" },
+  11: { name: "Sunset Bouquet", price: "$55.00", image: "../png/sunset.jfif" },
+  12: { name: "Garden Romance", price: "$65.00", image: "../png/garden.jfif" }
 };
 
 // Initialize search functionality
@@ -133,7 +133,7 @@ function displaySearchResults(productIds) {
 
 // Navigate to product from search
 function goToProductFromSearch(productId) {
-  window.location.href = `product-detail.html?id=${productId}`;
+  window.location.href = `../html/product-detail.html?id=${productId}`;
 }
 
 // Add styles for search modal
